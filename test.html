@@ -1,0 +1,41 @@
+<html>
+  <body>
+    <script>
+      let MultiMethod = function() {
+        this.methods = {}
+      }
+
+      MultiMethod.prototype.addCase = function(when, func) {
+        this.methods[when] = func
+      }
+
+      MultiMethod.prototype.callMulti = function(when, args = null) {
+        if (this.methods[when]) {
+          this.methods[when](args);
+        } else if (this.methods.default) {
+          this.methods.default(args)
+        } else {
+          console.warn(`No method of type ${when}`)
+        }
+
+      }
+
+
+      let b = new MultiMethod();
+      b.addCase('lion', (name) => {console.log('Roar! His Name is: ' + name)});
+      b.addCase('duck', () => {console.log('Quack!')});
+
+      let c = new MultiMethod();
+      c.addCase('sword', () => {console.log('slash')});
+      c.addCase('bow', () => {console.log('shoot')});
+      c.addCase('default', () => {console.log('nothing to do')})
+
+      b.callMulti('lion', 'Peter') // Roar! His Name Is: Peter
+      b.callMulti('duck') // Quack!
+      b.callMulti('beast') // console.warn no method
+      c.callMulti('bow') // shoot
+      c.callMulti('axe') // nothing to do
+
+    </script>
+  </body>
+</html>
