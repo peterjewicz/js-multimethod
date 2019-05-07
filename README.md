@@ -1,9 +1,14 @@
-# Fancy Alert
+# JS-MultiMethod
 STILL IN PROGESS - DO NOT USE IN CURRENT STATE!!!
-</br></br>
-Simple implementation of Clojure inspired multi-methods in Javascript.
 </br>
-Allows a function to accept different parameters and execute a different function on each.
+TODO:
+</br>
+Allow custom dispatching functions
+Allow multiple arguments
+</br></br>
+Simple implementation of Clojure inspired multi methods in Javascript.
+</br>
+Allows a function to accept different parameters and execute a different function depending on the parameters passed.
 
 ## Usage
 
@@ -13,12 +18,13 @@ let b = new MultiMethod();
 ````
 
 Add methods
-````b.addCase('lion', (name) => {console.log('Roar! His Name is: ' + name)});````
-````b.addCase('duck', () => {console.log('Quack!')});````
+````
+b.addCase('lion', (name) => {console.log('Roar! His Name is: ' + name)}); // optionally accepts arguments
+b.addCase('duck', () => {console.log('Quack!')});
+````
 
 
-Call the multi
-
+Call the function
 ````
 b('lion', 'Peter') // Roar! His Name Is: Peter
 b('duck') // Quack!

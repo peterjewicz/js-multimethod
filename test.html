@@ -1,8 +1,15 @@
 <html>
   <body>
     <script>
+      // Returns a group of functions to access the multi method attributes
       let MultiMethod = function() {
-        this.methods = {}
+        this.methods = {} // Holds the reference to the various methods
+
+        /**
+        * @param {when} String - action to match to function call
+        * @param {args} Any - arguments to pass to the function call
+        * Base method to call that looks for a When and passes args to matching function
+        */
         let returnFunctions = (when, args) => {
           if (this.methods[when]) {
             this.methods[when](args);
@@ -14,15 +21,24 @@
 
         }
 
+        returnFunctions['dispatch'] = () => {
+            // do stuff...
+        }
+
+        /**
+        * @param {when} String - action to match to function call
+        * @param {func} Function - Func to call on matching request
+        * MultiMethod.addCase() - adds a new case to check for the multimethod
+        */
         returnFunctions['addCase'] = (when, func) => {
           this.methods[when] = func
         }
 
-        return returnFunctions
+        return returnFunctions // returns all our nice functions
       }
 
 
-
+      // EXAMPLES
       let b = new MultiMethod();
       b.addCase('lion', (name) => {console.log('Roar! His Name is: ' + name)});
       b.addCase('duck', () => {console.log('Quack!')});
